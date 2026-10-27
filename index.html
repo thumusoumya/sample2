@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For You, My Love 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   UNSAID — Husband ➜ Wife Birthday Surprise (Rose Gold)
+   ========================================================= */
+:root{--rg:#e8b4a0;--rg2:#f7d9cc;--rg3:#b9786a;--gold:#e9c98b;--wine:#1a0a10;--cream:#fbf1ec}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#000;display:flex;justify-content:center;overflow:hidden;font-family:Montserrat,sans-serif;color:var(--cream)}
+.app{position:relative;width:100%;max-width:440px;height:100vh;height:100dvh;min-height:600px;overflow:hidden;overflow:clip;
+  background:radial-gradient(100% 70% at 50% 35%,#3a1420 0%,#1a0a10 55%,#0c0508 100%)}
+[hidden]{display:none!important}
+.glow{position:absolute;left:50%;top:40%;width:400px;height:400px;margin:-200px 0 0 -200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,180,160,.22),transparent 65%);animation:breathe 6s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{50%{transform:scale(1.12);opacity:.7}}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}
+#warn{position:absolute;top:0;left:0;right:0;background:#c0392b;color:#fff;font-size:12px;padding:6px 10px;z-index:99;display:none}
+
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 24px;
+  opacity:0;visibility:hidden;transition:opacity 1.1s ease,visibility 0s 1.1s,filter 1.1s;filter:blur(6px);z-index:5}
+.sc.on{opacity:1;visibility:visible;filter:none;transition:opacity 1.1s ease,filter 1.1s}
+.kick{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold)}
+.script{font-family:'Great Vibes',cursive;color:var(--rg2)}
+.serif{font-family:'Playfair Display',serif}
+
+/* ---------- 1. GIFT BOX ---------- */
+#s-box{cursor:pointer}
+#s-box .kick{margin-bottom:14px}
+#s-box h1{font:italic 500 26px/1.3 'Playfair Display';color:var(--cream);margin-bottom:46px}
+.box{position:relative;width:180px;height:170px;margin:0 auto}
+.box .base{position:absolute;bottom:0;left:10px;right:10px;height:120px;border-radius:6px;
+  background:linear-gradient(135deg,#f1c6b4,#c98a78 60%,#a86b5d);box-shadow:0 30px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+.box .lid{position:absolute;top:22px;left:0;right:0;height:38px;border-radius:6px;z-index:3;
+  background:linear-gradient(135deg,#f6d3c4,#d39684 60%,#b27565);box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform 1.1s cubic-bezier(.5,-0.3,.3,1),opacity 1s .4s}
+.box .rib-v{position:absolute;bottom:0;left:50%;width:22px;margin-left:-11px;height:120px;background:linear-gradient(90deg,#7a1f33,#a3324c,#7a1f33);z-index:2}
+.box .lid:after{content:"";position:absolute;top:0;bottom:0;left:50%;width:22px;margin-left:-11px;background:linear-gradient(90deg,#7a1f33,#a3324c,#7a1f33)}
+.bow{position:absolute;left:50%;top:-18px;margin-left:-40px;width:80px;height:44px;z-index:4}
+.bow:before,.bow:after{content:"";position:absolute;top:0;width:40px;height:40px;border:9px solid #a3324c;border-radius:50% 50% 50% 0}
+.bow:before{left:0;transform:rotate(-30deg)}.bow:after{right:0;transform:scaleX(-1) rotate(-30deg)}
+.box .shine{position:absolute;left:50%;top:40px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#fff;opacity:0;z-index:1;
+  box-shadow:0 0 60px 40px rgba(255,220,200,.9)}
+.box.open .lid{transform:translate(40px,-260px) rotate(35deg);opacity:0}
+.box.open .shine{animation:light 1.4s .3s ease-out both}
+@keyframes light{0%{opacity:0;transform:scale(.2)}40%{opacity:1}100%{opacity:0;transform:scale(9)}}
+.box{animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.tapline{margin-top:40px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,241,236,.6);animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.35}}
+
+/* ---------- 2. OPENING LINE ---------- */
+.hb-small{font:500 13px Montserrat;letter-spacing:.45em;color:var(--gold);opacity:0;transform:translateY(10px);transition:all 1s .2s}
+.hb-big{font-size:58px;line-height:1;margin:12px 0 4px;opacity:0;transform:scale(.92);transition:all 1.4s .6s;text-shadow:0 0 40px rgba(232,180,160,.35)}
+.hb-sub{font:italic 400 19px/1.5 'Playfair Display';color:rgba(251,241,236,.8);max-width:320px;opacity:0;transition:opacity 1.2s 1.6s}
+.sc.on .hb-small,.sc.on .hb-big,.sc.on .hb-sub{opacity:1;transform:none}
+
+/* ---------- 3. MOMENTS ---------- */
+.mnum{font:italic 500 15px 'Playfair Display';color:var(--gold);letter-spacing:.2em;margin-bottom:14px;opacity:0;transition:opacity .8s .3s}
+.arch{position:relative;width:250px;height:330px;border-radius:125px 125px 14px 14px;overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 0 1px rgba(233,201,139,.5),0 0 0 7px rgba(26,10,16,1),0 0 0 8px rgba(233,201,139,.35)}
+.arch img{width:100%;height:100%;object-fit:cover;display:block;background:#2a1018}
+.mline{font:italic 500 22px/1.4 'Playfair Display';color:var(--cream);max-width:320px;margin-top:26px;opacity:0;transform:translateY(10px);transition:all 1s .9s}
+.sc.on .mnum,.sc.on .mline{opacity:1;transform:none}
+/* 7 different reveals */
+.sc.on .r1{animation:iris 1.4s cubic-bezier(.6,0,.2,1) both}
+.sc.on .r2{animation:wipeL 1.3s cubic-bezier(.6,0,.2,1) both}
+.sc.on .r3{animation:blurIn 1.5s ease-out both}
+.sc.on .r4{animation:wipeU 1.3s cubic-bezier(.6,0,.2,1) both}
+.sc.on .r5{animation:tilt 1.4s cubic-bezier(.2,.9,.2,1) both}
+.sc.on .r6{animation:iris2 1.4s cubic-bezier(.6,0,.2,1) both}
+.sc.on .r7{animation:blurIn 1.8s ease-out both}
+@keyframes iris{from{clip-path:circle(0% at 50% 50%)}to{clip-path:circle(80% at 50% 50%)}}
+@keyframes iris2{from{clip-path:circle(0% at 50% 100%)}to{clip-path:circle(120% at 50% 100%)}}
+@keyframes wipeL{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes wipeU{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes blurIn{from{filter:blur(18px) brightness(1.8);transform:scale(1.15);opacity:0}to{filter:none;transform:none;opacity:1}}
+@keyframes tilt{from{transform:rotate(-8deg) translateY(40px) scale(.9);opacity:0}to{transform:none;opacity:1}}
+.sc.on .arch img{animation:kb 4.5s ease-out both}
+.arch.full{width:330px;height:300px;border-radius:150px 150px 14px 14px}
+.arch.full .bgb{position:absolute;inset:0;filter:blur(16px) brightness(.55);transform:scale(1.25)}
+.arch.full .fg{position:relative;object-fit:contain;background:transparent}
+.sc.on .arch.full .fg{animation:none}
+@keyframes kb{from{transform:scale(1.15)}to{transform:scale(1)}}
+
+/* ---------- 3b. LITTLE ONE'S MESSAGE ---------- */
+.kid-top{font:italic 400 19px 'Playfair Display';color:rgba(251,241,236,.8);opacity:0;transition:opacity 1s .2s}
+.kid-card{margin-top:26px;width:300px;padding:28px 18px 24px;border-radius:18px;background:#fffaf3;transform:rotate(-2deg) scale(.8);opacity:0;
+  box-shadow:0 25px 50px rgba(0,0,0,.5);transition:all 1s 1.2s cubic-bezier(.2,1.4,.4,1);position:relative}
+.kid-card:before{content:"";position:absolute;top:-12px;left:50%;width:90px;height:24px;margin-left:-45px;background:rgba(242,163,179,.75);transform:rotate(3deg)}
+.kid-big{font:700 40px/1.1 'Caveat',cursive}
+.kid-big span:nth-child(5n+1){color:#e0457b}.kid-big span:nth-child(5n+2){color:#f59e0b}.kid-big span:nth-child(5n+3){color:#22a06b}.kid-big span:nth-child(5n+4){color:#3b82f6}.kid-big span:nth-child(5n){color:#a855f7}
+.kid-sub{font:600 26px 'Caveat',cursive;color:#7a1f33;margin-top:10px}
+.kid-doodle{font-size:26px;margin-top:6px;letter-spacing:6px}
+.sc.on .kid-top{opacity:1}.sc.on .kid-card{opacity:1;transform:rotate(-2deg)}
+
+/* ---------- 4. CAKE ---------- */
+#s-cake .kick{margin-bottom:10px}
+#s-cake h2{font:italic 500 28px 'Playfair Display';margin-bottom:40px}
+.cake{position:relative;width:220px;height:210px;cursor:pointer}
+.plate{position:absolute;bottom:0;left:-10px;right:-10px;height:14px;border-radius:50%;background:linear-gradient(#e9e2df,#a99c98);box-shadow:0 10px 25px rgba(0,0,0,.5)}
+.tier{position:absolute;left:50%;border-radius:10px 10px 6px 6px;transform:translateX(-50%)}
+.t1{bottom:8px;width:210px;height:70px;background:linear-gradient(#f6dcd2,#e3b3a3)}
+.t2{bottom:76px;width:160px;height:58px;background:linear-gradient(#fbe9e2,#ecc3b5)}
+.t3{bottom:132px;width:110px;height:44px;background:linear-gradient(#fff3ee,#f1d0c4)}
+.tier:before{content:"";position:absolute;top:0;left:0;right:0;height:16px;border-radius:10px 10px 0 0;
+  background:radial-gradient(circle at 10px 0,#fff 9px,transparent 10px) 0 0/20px 16px repeat-x}
+.tier:after{content:"";position:absolute;bottom:10px;left:6px;right:6px;height:4px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,transparent 6px 12px);opacity:.8}
+.candles{position:absolute;bottom:176px;left:50%;transform:translateX(-50%);display:flex;gap:16px}
+.cd{position:relative;width:8px;height:34px;border-radius:2px;background:repeating-linear-gradient(-45deg,#fff 0 4px,#e8b4a0 4px 8px)}
+.fl{position:absolute;left:50%;top:-22px;width:12px;height:20px;margin-left:-6px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%,#fff 0 20%,#ffd36b 35%,#ff8a3d 70%,transparent 72%);box-shadow:0 0 18px 6px rgba(255,190,90,.6);
+  animation:flick .25s ease-in-out infinite alternate;transform-origin:50% 100%;transition:opacity .3s}
+@keyframes flick{to{transform:scale(.9,1.08) rotate(3deg)}}
+.out .fl{opacity:0}
+.smoke{position:absolute;left:50%;top:-30px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:rgba(220,220,220,.5);opacity:0}
+.out .smoke{animation:smoke 1.6s ease-out both}
+@keyframes smoke{0%{opacity:.8;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(4)}}
+.cakehint{margin-top:34px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(251,241,236,.6);animation:blink 1.8s infinite}
+
+/* ---------- 5. FINALE — HEART OF PHOTOS ---------- */
+#s-final{justify-content:flex-start;padding-top:36px;overflow-y:auto;overflow-x:hidden}
+#s-final > *{flex-shrink:0}
+.heart{position:relative;width:340px;height:350px}
+.heart .mid{position:absolute;left:50%;top:50%;width:130px;height:172px;margin:-86px 0 0 -65px;border-radius:65px 65px 10px 10px;object-fit:cover;
+  box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 1px rgba(233,201,139,.6),0 0 0 6px #1a0a10,0 0 0 7px rgba(233,201,139,.35);opacity:0;transform:scale(.8);transition:all 1.2s cubic-bezier(.2,1,.3,1);background:#2a1018}
+.heart .orb{position:absolute;width:74px;height:74px;border-radius:50%;object-fit:cover;border:3px solid var(--rg2);
+  box-shadow:0 10px 25px rgba(0,0,0,.5);opacity:0;transform:scale(.3);transition:all .9s cubic-bezier(.2,1.4,.4,1);background:#2a1018}
+.sc.on .heart img{opacity:1;transform:none}
+.heart:before{content:"";position:absolute;left:50%;top:50%;width:270px;height:270px;margin:-135px 0 0 -135px;border-radius:50%;border:1px dashed rgba(233,201,139,.3)}
+.hc{margin-top:8px;opacity:0;transition:opacity 1.2s 1.6s}
+.sc.on .hc{opacity:1}
+.hc .k{font:600 10px Montserrat;letter-spacing:.4em;color:var(--gold)}
+.hc .n{font:44px/1 'Great Vibes';color:#fff;margin-top:6px;text-shadow:0 0 24px rgba(232,180,160,.6)}
+.note{max-width:340px;margin-top:6px;font:italic 400 18px/1.55 'Playfair Display';color:rgba(251,241,236,.88)}
+.note p{opacity:0;transform:translateY(8px);transition:all 1s;margin-bottom:8px}
+.note p.s{opacity:1;transform:none}
+.sign{font:30px/1.2 'Great Vibes';color:var(--rg2);margin-top:6px;opacity:0;transition:opacity 1.2s}
+.sign.s{opacity:1}
+.again{margin:22px 0 10px;background:none;border:1px solid rgba(233,201,139,.5);color:var(--gold);font:500 11px Montserrat;letter-spacing:.3em;text-transform:uppercase;padding:12px 22px;border-radius:30px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div id="warn"></div>
+  <div class="glow"></div>
+  <canvas id="fx"></canvas>
+
+  <!-- 1. GIFT BOX -->
+  <section class="sc on" id="s-box">
+    <div class="kick" id="boxKick">For my wife</div>
+    <h1 id="boxTitle">Something I've been<br>keeping just for you…</h1>
+    <div class="box" id="box"><div class="shine"></div><div class="lid"></div><div class="bow"></div><div class="base"></div><div class="rib-v"></div></div>
+    <div class="tapline">Tap to open</div>
+  </section>
+
+  <!-- 2. OPENING LINE -->
+  <section class="sc" id="s-hello">
+    <div class="hb-small">HAPPY BIRTHDAY</div>
+    <div class="hb-big script" id="helloName"></div>
+    <div class="hb-sub" id="helloSub"></div>
+  </section>
+
+  <div id="moments"></div>
+
+  <!-- 3b. LITTLE ONE'S MESSAGE -->
+  <section class="sc" id="s-kid">
+    <div class="kid-top" id="kidTop"></div>
+    <div class="kid-card">
+      <div class="kid-big" id="kidBig"></div>
+      <div class="kid-sub" id="kidSub"></div>
+      <div class="kid-doodle">💕🌸⭐🌈</div>
+    </div>
+  </section>
+
+  <!-- 4. CAKE -->
+  <section class="sc" id="s-cake">
+    <div class="kick">One more thing</div>
+    <h2>Make a wish, my love ✨</h2>
+    <div class="cake" id="cake">
+      <div class="candles"><div class="cd"><div class="fl"></div><div class="smoke"></div></div><div class="cd"><div class="fl"></div><div class="smoke"></div></div><div class="cd"><div class="fl"></div><div class="smoke"></div></div></div>
+      <div class="tier t3"></div><div class="tier t2"></div><div class="tier t1"></div><div class="plate"></div>
+    </div>
+    <div class="cakehint" id="cakeHint">Tap the candles to blow them out</div>
+  </section>
+
+  <!-- 5. FINALE -->
+  <section class="sc" id="s-final">
+    <div class="heart" id="heart"></div>
+    <div class="hc"><div class="k">HAPPY BIRTHDAY</div><div class="n" id="finName"></div></div>
+    <div class="note" id="note"></div>
+    <div class="sign" id="sign"></div>
+    <button class="again" id="again" hidden>↺ Once more</button>
+  </section>
+</div>
+
+<script>
+/* =========================================================
+   ✏️ EDIT EVERYTHING HERE
+   ========================================================= */
+const LOVE = {
+  name: "Maheshwari",                        // wife's name
+  from: "— Forever yours, your husband & your little princess 💕",
+  song: "",                                  // add your song file e.g. "song.mp3" ("" = no song)
+  photos: ["sample2 image1", "sample2 image2 (2)", "sample2 image3", "sample2 image5", "sample2 image4", "sample2 image6"],   // exact file names (.jpeg/.jpg/.png auto)
+  fullPhotos: [3],                           // photo numbers shown FULL (no crop) — 3 = third photo
+
+  helloSub: "Every year with you becomes my favourite chapter.",
+
+  // one line for each photo (same order as photos)
+  lines: [
+    "The day you walked in, everything changed.",
+    "Your smile is still my favourite view.",
+    "Then you gave me the best gift of my life — our little girl.",
+    "Watching you be her mom is my favourite thing in the world.",
+    "You turned our house into a home full of love.",
+    "And I'd choose you again — in every lifetime. 🤍"
+  ],
+  photoTime: 3600,
+
+  // a little message from your daughter
+  kidTop: "Someone little has a message for you too… 🤫",
+  kidBig: "Happy Birthday Mumma!",
+  kidSub: "I love you sooo much 💕",
+  kidTime: 4800,
+
+  note: [
+    "To the woman who makes our world softer, brighter and full of love —",
+    "thank you for being my partner, my peace, and the most amazing mom to our daughter.",
+    "Today is all about you. Happy birthday, my love. 🌹"
+  ]
+};
+/* ========================================================= */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const app = $("#app");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+/* ---------- build ---------- */
+$("#helloName").textContent = LOVE.name;
+$("#helloSub").textContent = LOVE.helloSub;
+$("#kidTop").textContent = LOVE.kidTop;
+$("#kidBig").innerHTML = [...LOVE.kidBig].map(c => c === " " ? " " : `<span>${c}</span>`).join("");
+$("#kidSub").textContent = LOVE.kidSub;
+$("#finName").textContent = LOVE.name;
+$("#sign").textContent = LOVE.from;
+$("#note").innerHTML = LOVE.note.map(p => `<p>${p}</p>`).join("");
+$("#moments").innerHTML = LOVE.photos.map((_, i) => `
+  <section class="sc" id="m${i}">
+    ${(LOVE.fullPhotos || []).includes(i + 1)
+      ? `<div class="arch full r${(i % 7) + 1}"><img class="bgb" data-ph="${i}" alt=""><img class="fg" data-ph="${i}" alt=""></div>`
+      : `<div class="arch r${(i % 7) + 1}"><img data-ph="${i}" alt=""></div>`}
+    <div class="mline">${LOVE.lines[i] || ""}</div>
+  </section>`).join("");
+
+// finale: photo 1 in the centre, the rest orbit around it
+(function ring() {
+  const n = LOVE.photos.length, R = 135, cxp = 170, cyp = 165;
+  let html = `<img class="mid" data-ph="0" alt="">`;
+  for (let i = 1; i < n; i++) {
+    const a = -Math.PI / 2 + (i - 1) * 2 * Math.PI / (n - 1);
+    html += `<img class="orb" data-ph="${i}" alt="" style="left:${cxp + R * Math.cos(a) - 37}px;top:${cyp + R * Math.sin(a) - 37}px;transition-delay:${.3 + i * .15}s">`;
+  }
+  $("#heart").innerHTML = html;
+})();
+
+/* ---------- photos ---------- */
+const EXT = [".jpeg", ".jpg", ".JPG", ".JPEG", ".png", ".webp"];
+function tryLoad(base, i = 0) {
+  return new Promise(res => {
+    if (i >= EXT.length) return res(null);
+    const im = new Image();
+    im.onload = () => res(base + EXT[i]);
+    im.onerror = () => tryLoad(base, i + 1).then(res);
+    im.src = encodeURI(base + EXT[i]);
+  });
+}
+Promise.all(LOVE.photos.map(p => tryLoad(p))).then(urls => {
+  const miss = [];
+  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); $$(`[data-ph="${i}"]`).forEach(el => el.src = encodeURI(u)); });
+  if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Photo not found: " + miss.join(", ") + " — keep it in the same folder as index.html"; w.style.display = "block"; }
+});
+
+/* ---------- petals / sparkles ---------- */
+const cv = $("#fx"), cx = cv.getContext("2d"); let P = [];
+function fit() { const r = app.getBoundingClientRect(), k = devicePixelRatio || 1; cv.width = r.width * k; cv.height = r.height * k; cx.setTransform(k, 0, 0, k, 0, 0); }
+fit(); addEventListener("resize", fit);
+const PC = ["#c2405f", "#e06b84", "#a3324c", "#f2a3b3", "#e8b4a0"];
+function petals(n = 40) {
+  const W = app.clientWidth;
+  for (let i = 0; i < n; i++) P.push({ k: "p", x: Math.random() * W, y: -20 - Math.random() * 600, vx: (Math.random() - .5) * .8, vy: 1 + Math.random() * 1.6, r: Math.random() * 6, vr: (Math.random() - .5) * .05, s: 7 + Math.random() * 7, c: PC[i % PC.length], w: Math.random() * 6 });
+}
+function sparkle(x, y, n = 90) {
+  const C = ["#fff1d2", "#e9c98b", "#f7d9cc", "#ffffff"];
+  for (let i = 0; i < n; i++) { const a = Math.random() * 6.28, sp = 1.5 + Math.random() * 6;
+    P.push({ k: "s", x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.5, g: .07, s: 1 + Math.random() * 2.5, c: C[i % 4], l: 1 }); }
+}
+(function loop() {
+  const W = app.clientWidth, H = app.clientHeight; cx.clearRect(0, 0, W, H);
+  P = P.filter(p => p.y < H + 30 && (p.l === undefined || p.l > 0));
+  for (const p of P) {
+    if (p.k === "p") {
+      p.w += .03; p.x += p.vx + Math.sin(p.w) * .6; p.y += p.vy; p.r += p.vr;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.globalAlpha = .85;
+      cx.beginPath(); cx.ellipse(0, 0, p.s * Math.abs(Math.cos(p.w)) + 2, p.s * .6, 0, 0, 7); cx.fill(); cx.restore();
+    } else {
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.l -= .012;
+      cx.globalAlpha = Math.max(0, p.l); cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, p.s, 0, 7); cx.fill(); cx.globalAlpha = 1;
+    }
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ---------- song ---------- */
+let song;
+function startSong() {
+  if (!LOVE.song || song) return;
+  song = new Audio(LOVE.song); song.loop = true; song.volume = 0; song.play().catch(() => {});
+  let v = 0; const f = setInterval(() => { v = Math.min(.85, v + .05); song.volume = v; if (v >= .85) clearInterval(f); }, 120);
+}
+
+/* ---------- flow ---------- */
+function show(id) { $$(".sc.on").forEach(s => s.classList.remove("on")); const el = $("#" + id); void el.offsetWidth; el.classList.add("on"); return el; }
+function at(el) { const a = app.getBoundingClientRect(), r = el.getBoundingClientRect(); return [r.left - a.left + r.width / 2, r.top - a.top + r.height / 2]; }
+
+let started = false;
+$("#s-box").addEventListener("click", async () => {
+  if (started) return; started = true;
+  startSong();
+  $("#box").classList.add("open");
+  const [x, y] = at($("#box")); setTimeout(() => sparkle(x, y - 40, 120), 300);
+  petals(45);
+  await wait(1700);
+  show("s-hello"); await wait(4200);
+  for (let i = 0; i < LOVE.photos.length; i++) {
+    show("m" + i);
+    if (i === 3) petals(20);
+    await wait(LOVE.photoTime);
+  }
+  show("s-kid"); setTimeout(() => { const [kx, ky] = at($(".kid-card")); sparkle(kx, ky, 80); }, 1600);
+  await wait(LOVE.kidTime);
+  show("s-cake");
+});
+
+let blown = false;
+$("#cake").addEventListener("click", async () => {
+  if (blown) return; blown = true;
+  $("#cake").classList.add("out"); $("#cakeHint").textContent = "Wish made 🤍";
+  const [x, y] = at($(".candles")); sparkle(x, y, 140);
+  await wait(1400);
+  show("s-final"); petals(60);
+  setTimeout(() => { const [hx, hy] = at($("#heart")); sparkle(hx, hy, 160); }, 1800);
+  await wait(2600);
+  for (const p of $$("#note p")) { p.classList.add("s"); await wait(1300); }
+  $("#sign").classList.add("s");
+  await wait(1200); const a = $("#again"); a.hidden = false;
+});
+$("#again").onclick = () => location.reload();
+</script>
+</body>
+</html>
