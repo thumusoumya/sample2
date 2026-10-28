@@ -87,6 +87,21 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
 .sc.on .arch.full .fg{animation:none}
 @keyframes kb{from{transform:scale(1.15)}to{transform:scale(1)}}
 
+/* ---------- 3a. DRAW A HEART ---------- */
+.dh-k{font:italic 500 26px 'Playfair Display';color:var(--cream)}
+.dh-s{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin:8px 0 10px}
+.dh{width:320px;height:300px;touch-action:none;cursor:crosshair}
+.dh .guide{fill:none;stroke:rgba(247,217,204,.35);stroke-width:3;stroke-dasharray:2 12;stroke-linecap:round}
+.dh .lit{fill:#fff1d2;filter:drop-shadow(0 0 6px #ffb37a) drop-shadow(0 0 12px #e06b84)}
+.dh .fill{fill:url(#hg);opacity:0;transform-origin:150px 150px;transform:scale(.6);transition:all 1.2s cubic-bezier(.2,1.3,.4,1)}
+.dh.done .fill{opacity:1;transform:scale(1)}
+.dh.done .guide{opacity:0}
+.dh .start{fill:var(--gold);animation:blink 1.2s infinite}
+.dh.done .start{display:none}
+.dh-msg{font:52px/1 'Great Vibes';color:#fff;opacity:0;transition:opacity 1.2s .6s;margin-top:-4px;text-shadow:0 0 24px rgba(232,180,160,.6)}
+.dh-done .dh-msg{opacity:1}
+.dh-help{margin-top:6px;background:none;border:0;color:rgba(251,241,236,.6);font:500 12px Montserrat;text-decoration:underline;cursor:pointer}
+
 /* ---------- 3b. LITTLE ONE'S MESSAGE ---------- */
 .kid-top{font:italic 400 19px 'Playfair Display';color:rgba(251,241,236,.8);opacity:0;transition:opacity 1s .2s}
 .kid-card{margin-top:26px;width:300px;padding:28px 18px 24px;border-radius:18px;background:#fffaf3;transform:rotate(-2deg) scale(.8);opacity:0;
@@ -222,6 +237,12 @@ const LOVE = {
   ],
   photoTime: 3600,
 
+  // in the middle: she draws a heart with her finger to unlock the next photos
+  heartAfter: 3,                             // comes after this photo number
+  heartTitle: "Draw a heart for me 🤍",
+  heartHint: "Trace the dotted heart with your finger",
+  heartMsg: "You complete me",
+
   // a little message from your daughter
   kidTop: "Someone little has a message for you too… 🤫",
   kidBig: "Happy Birthday Mumma!",
@@ -258,6 +279,20 @@ $("#moments").innerHTML = LOVE.photos.map((_, i) => `
     <div class="mline">${LOVE.lines[i] || ""}</div>
   </section>`).join("");
 
+$("#moments").insertAdjacentHTML("beforeend", `
+  <section class="sc" id="s-heart">
+    <div class="dh-k">${LOVE.heartTitle}</div>
+    <div class="dh-s" id="dhHint">${LOVE.heartHint}</div>
+    <svg class="dh" id="dh" viewBox="0 0 300 280">
+      <defs><radialGradient id="hg" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#f2a3b3"/><stop offset=".6" stop-color="#c2405f"/><stop offset="1" stop-color="#7a1f33"/></radialGradient></defs>
+      <path class="fill" d="M150 255 C 60 190, 20 140, 30 90 C 40 40, 110 30, 150 80 C 190 30, 260 40, 270 90 C 280 140, 240 190, 150 255 Z"/>
+      <path class="guide" id="dhPath" d="M150 80 C 190 30, 260 40, 270 90 C 280 140, 240 190, 150 255 C 60 190, 20 140, 30 90 C 40 40, 110 30, 150 80 Z"/>
+      <g id="dhLit"></g><circle class="start" cx="150" cy="80" r="7"/>
+    </svg>
+    <div class="dh-msg">${LOVE.heartMsg}</div>
+    <button class="dh-help" id="dhHelp" hidden>Help me draw it ✨</button>
+  </section>`);
+
 // finale: photo 1 in the centre, the rest orbit around it
 (function ring() {
   const n = LOVE.photos.length, R = 135, cxp = 170, cyp = 165;
@@ -280,9 +315,10 @@ function tryLoad(base, i = 0) {
     im.src = encodeURI(base + EXT[i]);
   });
 }
+const PH = [];
 Promise.all(LOVE.photos.map(p => tryLoad(p))).then(urls => {
   const miss = [];
-  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); $$(`[data-ph="${i}"]`).forEach(el => el.src = encodeURI(u)); });
+  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); PH[i] = encodeURI(u); $$(`[data-ph="${i}"]`).forEach(el => el.src = PH[i]); });
   if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Photo not found: " + miss.join(", ") + " — keep it in the same folder as index.html"; w.style.display = "block"; }
 });
 
@@ -316,6 +352,40 @@ function sparkle(x, y, n = 90) {
   requestAnimationFrame(loop);
 })();
 
+/* ---------- draw-a-heart ---------- */
+function drawHeart() {
+  return new Promise(res => {
+    const svg = $("#dh"), path = $("#dhPath"), L = path.getTotalLength(), N = 56, pts = [], hit = new Set();
+    for (let i = 0; i < N; i++) { const q = path.getPointAtLength(L * i / N); pts.push([q.x, q.y]); }
+    let down = false, finished = false;
+    const toSvg = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left) * 300 / r.width, (e.clientY - r.top) * 280 / r.height]; };
+    function light(i) {
+      if (hit.has(i)) return; hit.add(i);
+      const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("cx", pts[i][0]); c.setAttribute("cy", pts[i][1]); c.setAttribute("r", 4.5); c.setAttribute("class", "lit");
+      $("#dhLit").appendChild(c);
+    }
+    function finish() {
+      if (finished) return; finished = true;
+      pts.forEach((_, i) => light(i));
+      svg.classList.add("done"); $("#s-heart").classList.add("dh-done"); $("#dhHelp").hidden = true; $("#dhHint").style.visibility = "hidden";
+      const [x, y] = at(svg); sparkle(x, y, 160); petals(25);
+      setTimeout(res, 3000);
+    }
+    function move(e) {
+      if (!down || finished) return;
+      const [x, y] = toSvg(e);
+      pts.forEach(([px, py], i) => { if (Math.hypot(px - x, py - y) < 26) light(i); });
+      if (hit.size / N > .85) finish();
+    }
+    svg.addEventListener("pointerdown", e => { down = true; svg.setPointerCapture && svg.setPointerCapture(e.pointerId); move(e); });
+    svg.addEventListener("pointermove", move);
+    addEventListener("pointerup", () => down = false);
+    $("#dhHelp").onclick = finish;
+    setTimeout(() => { if (!finished) { const b = $("#dhHelp"); b.hidden = false; b.removeAttribute("hidden"); } }, 20000);
+  });
+}
+
 /* ---------- song ---------- */
 let song;
 function startSong() {
@@ -341,6 +411,7 @@ $("#s-box").addEventListener("click", async () => {
     show("m" + i);
     if (i === 3) petals(20);
     await wait(LOVE.photoTime);
+    if (i + 1 === LOVE.heartAfter) { show("s-heart"); await drawHeart(); }
   }
   show("s-kid"); setTimeout(() => { const [kx, ky] = at($(".kid-card")); sparkle(kx, ky, 80); }, 1600);
   await wait(LOVE.kidTime);
