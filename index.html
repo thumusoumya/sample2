@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>For You, My Love 🌹</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B9%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -213,6 +214,7 @@ body{background:#000;display:flex;justify-content:center;overflow:hidden;font-fa
   </section>
 </div>
 
+<script src="crypto.js"></script>
 <script>
 /* =========================================================
    ✏️ EDIT EVERYTHING HERE
@@ -221,7 +223,8 @@ const LOVE = {
   name: "Maheshwari",                        // wife's name
   from: "— Forever yours, your husband & your little princess 💕",
   song: "sample2.mpeg",                      // your song file ("" = no song)
-  photos: ["sample2 image1", "sample2 image2 (2)", "sample2 image3", "sample2 image5", "sample2 image4", "sample2 image6"],   // exact file names (.jpeg/.jpg/.png auto)
+  encKey: "YOUR_ENCRYPTION_PASSWORD",        // the EXACT password the enc/*.bin files were encrypted with
+  photos: ["sample2 image1", "sample2 image2", "sample2 image3", "sample2 image5", "sample2 image4", "sample2 image6"],   // file names WITHOUT extension: loaded from enc/<name>.bin
   fullPhotos: [3],                           // photo numbers shown FULL (no crop) — 3 = third photo
 
   helloSub: "Every year with you becomes my favourite chapter.",
@@ -304,23 +307,21 @@ $("#moments").insertAdjacentHTML("beforeend", `
   $("#heart").innerHTML = html;
 })();
 
-/* ---------- photos ---------- */
-const EXT = [".jpeg", ".jpg", ".JPG", ".JPEG", ".png", ".webp"];
-function tryLoad(base, i = 0) {
-  return new Promise(res => {
-    if (i >= EXT.length) return res(null);
-    const im = new Image();
-    im.onload = () => res(base + EXT[i]);
-    im.onerror = () => tryLoad(base, i + 1).then(res);
-    im.src = encodeURI(base + EXT[i]);
+/* ---------- photos: decrypted from enc/<name>.bin into blob: URLs ---------- */
+const PH = [];
+function loadPhotos() {
+  return Promise.all(LOVE.photos.map(async (p, i) => {
+    try {
+      const buf = await decryptFile(LOVE.encKey, encodeURI("enc/" + p + ".bin"));
+      PH[i] = URL.createObjectURL(new Blob([buf], { type: "image/jpeg" }));
+      $$(`[data-ph="${i}"]`).forEach(el => el.src = PH[i]);
+      return null;
+    } catch (e) { PH[i] = ""; return p; }
+  })).then(miss => {
+    miss = miss.filter(Boolean);
+    if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Could not decrypt: " + miss.join(", ") + " — check enc/ folder and encKey (needs https or localhost)"; w.style.display = "block"; }
   });
 }
-const PH = [];
-Promise.all(LOVE.photos.map(p => tryLoad(p))).then(urls => {
-  const miss = [];
-  urls.forEach((u, i) => { if (!u) return miss.push(LOVE.photos[i]); PH[i] = encodeURI(u); $$(`[data-ph="${i}"]`).forEach(el => el.src = PH[i]); });
-  if (miss.length) { const w = $("#warn"); w.textContent = "⚠️ Photo not found: " + miss.join(", ") + " — keep it in the same folder as index.html"; w.style.display = "block"; }
-});
 
 /* ---------- petals / sparkles ---------- */
 const cv = $("#fx"), cx = cv.getContext("2d"); let P = [];
@@ -402,11 +403,13 @@ let started = false;
 $("#s-box").addEventListener("click", async () => {
   if (started) return; started = true;
   startSong();
+  const imgsReady = loadPhotos();   // decrypt the photos while the box opens and the greeting plays
   $("#box").classList.add("open");
   const [x, y] = at($("#box")); setTimeout(() => sparkle(x, y - 40, 120), 300);
   petals(45);
   await wait(1700);
   show("s-hello"); await wait(4200);
+  await imgsReady;   // make sure every photo is ready before the first one appears
   for (let i = 0; i < LOVE.photos.length; i++) {
     show("m" + i);
     if (i === 3) petals(20);
